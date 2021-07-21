@@ -35,5 +35,5 @@ exports.getAll = async() => {
         );
         questionsArray.push(question);
     });
-    return question;
+    return questionsArray;
 }
