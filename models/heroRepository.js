@@ -9,4 +9,12 @@ module.exports = class {
   getAll(){
       throw new Error('ERR_METHOD_NOT_IMPLEMENTED');
   }
+
+  deleteHero(id) {
+    throw new Error('ERR_METHOD_NOT_IMPLEMENTED')
+  }
+
+  updateHero(id) {
+    throw new Error('ERR_METHOD_NOT_IMPLEMENTED')
+  }
 }
