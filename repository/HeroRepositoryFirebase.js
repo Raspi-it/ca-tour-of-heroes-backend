@@ -62,6 +62,4 @@ exports.clearMessages = async() => {
 
 exports.addMessages = async(msg) => {
     messages.push(msg);
-    console.log(messages);
-    return messages;
 }

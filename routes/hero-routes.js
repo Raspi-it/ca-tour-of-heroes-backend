@@ -9,10 +9,11 @@ router.get('/heroes', getAllHeroes);
 router.get('/hero/delete/', deleteHero);
 router.get('/hero/update/:id', updateHero);
 router.get('/hero/add/:id', addHero);
-router.get('/messages/add', addMessages);
+
 router.get('/messages/clear/', clearMessages);
 router.get('/messages/get/', getMessages);
 
+router.post('/messages/add', addMessages);
 
 module.exports = {
     routes: router

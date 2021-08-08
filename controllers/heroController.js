@@ -69,11 +69,9 @@ module.exports = {
     },
 
     async addMessages(req, res) {
-        const msg = req.params.msg;
-        console.log('addMessagesController');
+        const msg = req.body.msg;
         if(msg) {
-            const msg = await AddMessages(msg);
-            res.send(msg.data());
+            await AddMessages(msg);
         } else {
             res.status(404).send('Message could not be added');
         }
@@ -87,7 +85,7 @@ module.exports = {
             return res.status(400).send(error.message)
         }
 
-        res.send(allHeroes);
+        res.send(allMessages.data());
     },
 
     async clearMessages(req, res) {
