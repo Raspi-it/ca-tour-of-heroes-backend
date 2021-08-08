@@ -60,5 +60,5 @@ exports.clearMessages = async() => {
 }
 
 exports.addMessages = async(msg) => {
-    messages.push(msg);
+    messages.push('HeroService: '+msg);
 }
