@@ -31,12 +31,11 @@ exports.getAllHeroes = async() => {
 }
 
 exports.deleteHero = async(HeroId) => {
-    await db.collection('heroes').doc(HeroId).delete();
-    console.log('tried to delete!');
+    await firestore.collection('heroes').doc(HeroId).delete();
 }
 
 exports.updateHero = async(HeroId, HeroName) => {
-    const ref = db.collection('heroes').doc(HeroId);
+    const ref = firestore.collection('heroes').doc(HeroId);
 
     const res = await ref.update({name: HeroName});
     console.log('Updated Hero with ID: ', res.id);
@@ -44,9 +43,10 @@ exports.updateHero = async(HeroId, HeroName) => {
 }
 
 exports.addHero = async(id, name) => {
-    const res = await db.collection('heroes').doc(id).add({id: id, name: name});
-    console.log('Added Hero with ID: ', res.id);
-    return getHero(id);
+
+    var docId = "" + id;
+
+    await firestore.collection('heroes').doc(docId).set({id: id, name: name});
 }
 
 exports.getMessages = async() => {
@@ -55,7 +55,6 @@ exports.getMessages = async() => {
 
 exports.clearMessages = async() => {
     messages.length = 0;
-    console.log(messages);
     return messages;
 }
 

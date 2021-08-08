@@ -2,6 +2,7 @@
 
 const GetHero = require('../use-case/getHero');
 const GetAllHeroes = require('../use-case/getAllHeroes');
+const AddHero = require('../use-case/addHero');
 const UpdateHero = require('../use-case/updateHero');
 const DeleteHero = require('../use-case/deleteHero');
 const GetMessages = require('../use-case/getMessages');
@@ -23,7 +24,6 @@ module.exports = {
 
     async getAllHeroes(req, res){
         const allHeroes = await GetAllHeroes();
-        console.log('getAllHeroesController');
         if(!allHeroes){
             return res.status(400).send(error.message)
         }
@@ -46,32 +46,33 @@ module.exports = {
     },
 
     async addHero(req, res) {
-        const id = req.params.id;
-        const name = req.params.name;
-        console.log('addHeroController');
+        const id = req.body.id;
+        const name = req.body.name;
+
         if(id) {
-            const hero = await AddHero(id, name);
-            res.send(hero.data());
+            await AddHero(id, name);
         } else {
-            res.status(404).send('Message could not be added');
+            res.status(404).send('Hero could not be added');
         }
     },
 
     async deleteHero(req, res) {
-        const id = req.params.id;
-        console.log('deleteHeroController');
-        if(hero.exists) {
-            const del = await DeleteHero(id, HeroRepositoryFirebase)
-            res.send(del.data());
-        }else {
+        const ID = req.body.body.id;
+        var id = "" + ID;
+        const hero = await GetHero(id)
+
+        if(!hero.exists) {
             res.status(404).send('Hero with the given ID not found');
+        }else {
+            await DeleteHero(id);
+            //res.send(del.data());
         }
     },
 
     async addMessages(req, res) {
         const msg = req.body.msg;
         if(msg) {
-            await AddMessages(msg);
+            AddMessages(msg);
         } else {
             res.status(404).send('Message could not be added');
         }
@@ -89,7 +90,6 @@ module.exports = {
 
     async clearMessages(req, res) {
         const clearMessages = await ClearMessages();
-        console.log('clearMessagesController');
 
         res.send(clearMessages);
     }
