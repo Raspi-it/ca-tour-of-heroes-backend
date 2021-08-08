@@ -79,13 +79,12 @@ module.exports = {
 
     async getMessages(req, res) {
         const allMessages = await GetMessages();
-        console.log('getMessagesController');
 
         if(!allMessages){
             return res.status(400).send(error.message)
         }
 
-        res.send(allMessages.data());
+        res.send(allMessages);
     },
 
     async clearMessages(req, res) {

@@ -50,7 +50,6 @@ exports.addHero = async(id, name) => {
 }
 
 exports.getMessages = async() => {
-    console.log(messages);
     return messages;
 }
 
