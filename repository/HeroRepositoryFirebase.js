@@ -6,7 +6,10 @@ const firestore = firebase.firestore();
 var messages = [];
 
 exports.getHero = async(HeroId) => {
-    const hero = await firestore.collection('heroes').doc(HeroId);
+
+    var docId = "" + HeroId;
+
+    const hero = await firestore.collection('heroes').doc(docId);
     const data = await hero.get();
     
     console.log(data.data());
@@ -34,12 +37,11 @@ exports.deleteHero = async(HeroId) => {
     await firestore.collection('heroes').doc(HeroId).delete();
 }
 
-exports.updateHero = async(HeroId, HeroName) => {
-    const ref = firestore.collection('heroes').doc(HeroId);
+exports.updateHero = async(HeroName, HeroId) => {
 
-    const res = await ref.update({name: HeroName});
-    console.log('Updated Hero with ID: ', res.id);
-    return getHero(HeroId);
+    var docId = "" + HeroId;
+
+    await firestore.collection('heroes').doc(docId).update({name: HeroName});
 }
 
 exports.addHero = async(id, name) => {

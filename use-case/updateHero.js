@@ -1,7 +1,7 @@
 'use strict';
 const HeroRepositoryFirebase = require('../repository/HeroRepositoryFirebase');
 
-module.exports = (HeroId) => {
+module.exports = (name, HeroId) => {
   console.log('updateHeroUseCase');
-  return HeroRepositoryFirebase.updateHero(HeroId);
+  return HeroRepositoryFirebase.updateHero(name, HeroId);
 };

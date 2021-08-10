@@ -32,13 +32,14 @@ module.exports = {
     },
 
     async updateHero(req, res) {
-        const id = req.params.id;
-        const new_name = req.params.new_name;
+        const id = req.body[0];
+        const new_name = req.body[1];
+
         const hero = await GetHero(id)
-        console.log('updateHeroController');
+
         if(hero.exists) {
-            const hero = await UpdateHero(id, new_name)
-            res.send(hero.data());
+            const hero = await UpdateHero(new_name, id);
+            res.send(hero);
         }else {
             //res.send(hero.data());
             res.status(404).send('Hero with the given ID not found');
