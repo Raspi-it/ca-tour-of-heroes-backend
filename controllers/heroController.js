@@ -15,6 +15,7 @@ module.exports = {
             const id = req.params.id;
             const hero = await GetHero(id)
             console.log('getHeroController');
+            console.log(hero);
             if(!hero.exists) {
                 res.status(404).send('Hero with the given ID not found');
             }else {
